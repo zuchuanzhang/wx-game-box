@@ -1,0 +1,82 @@
+<!--index.wxml-->
+<view class="container">
+  <!-- Banner -->
+  <swiper  autoplay="true" circular="true" class="banner-container" duration="1000"  interval="5000">
+    <swiper-item wx:for="{{bannerList}}" wx:for-item="banner" wx:key="_id"
+      data-appid="{{banner.appid}}" data-apptitle="{{banner.title}}" bindtap="handleTapBanner">
+      <navigator target="miniProgram" open-type="navigate" class="banner-item" app-id="{{banner.appid}}"
+        path="{{ app.needPath ? app.path : '' }}"
+        extra-data="{{ app.needExtraData ? app.extraData : '' }}"
+        version="{{ app.needVersion ? app.version : '' }}">
+        <view class='banner_title'>{{banner.title}}</view>
+        <view class='banner_description'>{{banner.description}}</view>
+        <image class="slide-image" mode="scaleToFill" src="{{banner.banner}}"></image>
+      </navigator>
+    </swiper-item>
+  </swiper>
+  <!-- List -->
+  <scroll-view class="list-container" scroll-y style="height: {{windowHeight -250}}px;">
+    <view class='xin'> 
+      <view class='zuixing'>最新推荐</view>
+    </view>
+    <view class='gameList' wx:for="{{appList}}" wx:for-item="app" wx:key="_id"
+      data-appid="{{app.appid}}" data-apptitle="{{app.title}}" bindtap="handleTapApp">
+        <!-- <navigator class="app-item {{(index + 1) === appList.length ? 'last-app-item' : ''}}"  style="background-color: {{ app.backgroundColor }}" -->
+        <navigator class="app-item {{(index + 1) === appList.length ? 'last-app-item' : ''}}"
+        target="miniProgram" open-type="navigate" app-id="{{app.appid}}"
+        path="{{ app.needPath ? app.path : '' }}"
+        extra-data="{{ app.needExtraData ? app.extraData : '' }}"
+        version="{{ app.needVersion ? app.version : '' }}">
+        <view class="icon">
+          <image class="icon-image" mode="scaleToFill" src="{{app.icon}}"></image>
+        </view>
+        <view class="content">
+          <view class="header">
+            <view class="title">{{app.title}}</view>
+          </view>
+          <view class="body">{{app.description}}</view>
+        </view>
+        <view class="goto">
+           <view class='goto-shiwan'>
+            <view>试玩</view>
+          </view> 
+           <!-- <image class="goto-image" mode="scaleToFill" src="../../images/right-arrow.png"></image>  -->
+        </view>
+      </navigator>
+    </view>
+  </scroll-view>
+  <view class="action-container">
+    <view class="view-rel-star">
+      <button class="btn-star" bindtap="handleStarApp">
+        <image class="btn-icon" mode="scaleToFill" src="../../images/star.png"></image>
+        <text class="btn-text">收藏</text>
+      </button>
+    </view>
+    <view class="view-rel-share">
+      <button class="btn-share" openType="share">
+        <image class="btn-icon" mode="scaleToFill" src="../../images/share.png"></image>
+        <text class="btn-text">分享</text>
+      </button>
+    </view>
+  </view>
+  
+  <view class="star-tips-container" wx:if="{{showStarTips}}">
+    <view class="star-tips">
+      <view class="star-tips-view">
+        <image bindtap="handleClose" class="img-close" src="../../images/close.png"></image>
+        <image class="star-tips-image" src="{{starTipsImagePath}}"></image>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- <view class='tiaotiyanban'> -->
+  <!-- <navigator class="aaa"
+    target="miniProgram" open-type="navigate" app-id="wx7430791a33a837b6"
+    path="?channelId=test1"
+    version="trial">
+  </navigator> -->
+  <!-- <navigator class="aaa"
+    target="miniProgram" open-type="navigate" app-id="wx7430791a33a837b6"
+    path="?channelId=yzdh">
+  </navigator> -->
+<!-- </view> -->
